@@ -1,0 +1,19 @@
+{
+  "name": "questionsandanswers-system-using-mongodb-and-socketio",
+  "version": "1.0.0",
+  "description": "Travel Agency Q&A System",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AhmedSharaf98/QuestionsAndAnswers-System-using-mongodb-and-socketio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AhmedSharaf98/QuestionsAndAnswers-System-using-mongodb-and-socketio/issues"
+  },
+  "homepage": "https://github.com/AhmedSharaf98/QuestionsAndAnswers-System-using-mongodb-and-socketio#readme"
+}
