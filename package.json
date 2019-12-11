@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "mongodb": "^2.2.30",
+    "socket.io": "^2.0.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AhmedSharaf98/QuestionsAndAnswers-System-using-mongodb-and-socketio.git"
