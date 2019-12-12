@@ -78,9 +78,9 @@ mongodb.connect('mongodb://127.0.0.1/travelagency', function(error, db){
 
         //Retrive Answer for a specific question
         socket.on('server-answer', function(data){
-            console.log("Server: Answer Requested");
+            console.log("Server: Answer Requested..");
             let _question = data.question;
-            console.log("Server: Answer Requested is ", _question);
+            console.log("Server: Question is ", _question);
             questions.find({question : _question},{answer: 1}).toArray(function(error, result){
                 if(error) throw error;
                 console.log("Server: Answer returned is ", result);
