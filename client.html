@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+    <title>Travel Agency Q&A - Client</title>
+    <style>
+        .container{
+            padding: 20px;
+            padding-top: 0;
+            border-radius: 20px;
+            border: 1px solid #000;
+        }
+        .question{
+            margin-top: 15px;
+            font-style:italic;
+            display: block;    
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12">
+                <h1 class="text-center">
+                    Questions
+                </h1>
+                <div class="container" style="background-color: blanchedalmond; height: 250px; overflow: scroll;" id="questions-container">
+                </div>
+                <h1 class="text-center">
+                    Answer 
+                </h1>
+                <div class="container" style="background-color:aqua; height: 250px; overflow: scroll;" id="answer-container">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script>
+        (function(){
+            var socket = io.connect('http://127.0.0.1:4040');
+
+            if(socket !== undefined){
+                console.log('Connected to socket...');
+                socket.emit('server-questions');
+                socket.on('client-questions', function(data){
+                    console.log("Data Recieved from Client Questions Channel");
+                    //console.log(data);
+                    if(data.length){
+                        for(var x = 0;x < data.length;x++){
+                            var message = document.createElement('div');
+                            message.setAttribute('class', 'question');
+                            message.textContent = data[x].question;
+                            $('#questions-container').append(message);
+                        }
+                    }
+                });
+                socket.on('client-answer', function(data){
+                    console.log(data);
+                    $('#answer-container').html(data[0].answer);
+                });
+            }
+
+            $(document).on('click', '.question', function(){
+                socket.emit('server-answer', { 
+                    question:$(this).text()
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
